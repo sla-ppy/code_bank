@@ -3,20 +3,19 @@
 #include <algorithm>
 
 bool solution(std::vector<int> sequence) {
+    for (auto i = sequence.begin(); i != sequence.end(); ++i) {
+        std::cout << *i << " ";
+    }
 
-    // 1. sort
-    std::sort(sequence.begin(), sequence.end());
-
-    std::cout << "Removing the item: " << '\n';
     // 2. remove a single item that isn't increasing
     bool deletedOnce{false};
     for (auto i = sequence.begin(); i != sequence.end(); ++i) {
-        std::cout << *i;
-
         if(!deletedOnce) {
-            // FIXME: this is undefined behaviour
             if(*i == *(i+1)) {
-                // FIXME: this is undefined behaviour
+                i = sequence.erase(i);
+                deletedOnce = true;
+            }
+            if(*i > *(i+1)) {
                 i = sequence.erase(i);
                 deletedOnce = true;
             }
@@ -25,22 +24,32 @@ bool solution(std::vector<int> sequence) {
 
     std::cout << '\n';
     std::cout << '\n';
+    for (auto i = sequence.begin(); i != sequence.end(); ++i) {
+        std::cout << *i << " ";
+    }
+
+    std::cout << '\n';
+    std::cout << '\n';
     std::cout << "Re-checking after removal: " << '\n';
     // 3. check to see if we have any more
     for (auto i = sequence.begin(); i != sequence.end(); ++i) {
-        // FIXME: this is undefined behaviour
-        if(*i == *(i+1)) {
+        if(sequence.size() == 1) {
             return true;
-        } else {
+        }
+
+        if(*(i + 1) < *i) {
+            return false;
+        }
+        if(*i == *(i-1)) {
             return false;
         }
     }
 
-    return false;
+    return true;
 }
 
 int main() {
-    std::cout << solution({1, 2, 3, 4, 5, 3, 5, 6});
+    std::cout << solution({3, 5, 67, 98, 3});
 
     return 0;
 
