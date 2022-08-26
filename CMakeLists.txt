@@ -3,6 +3,8 @@ project(code_bank)
 
 set(CMAKE_CXX_STANDARD 14)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
+
 add_executable(code_bank
-        0_code_signal/0005_makeArrayConsecutive2.cpp
+        0_code_signal/0006_almostIncreasingSequence.cpp
         )
